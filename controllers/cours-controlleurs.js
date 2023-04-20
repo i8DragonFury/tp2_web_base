@@ -31,6 +31,9 @@ const creerCours = async (requete, reponse, next) => {
     
     const {nom,description, profNom} = requete.body;
 
+    console.log(nom)
+    console.log(requete.body)
+
     const nouvelleCours = new Cours({
         nom: nom,
         description: description,

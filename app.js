@@ -1,13 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const app = express();
+const PORT = 3001;
 const mongoose = require("mongoose");
-mongoose.set('strictQuery', true)
 const coursRoute = require("./routes/cours-routes");
-const etudiantsRoute = require("./routes/etudiants-routes");
 const profRoute = require("./routes/prof-routes");
+const etudiantsRoute = require("./routes/etudiants-routes");
 const HttpErreur = require("./models/http-erreur");
 
-const app = express();
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -28,7 +32,7 @@ app.use((error, requete, reponse, next) => {
       message: error.message || "Une erreur inconnue est survenue",
     });
 });
-
+mongoose.set('strictQuery', true);
  mongoose
  .connect("mongodb://127.0.0.1:27017")
  .then(() => {
